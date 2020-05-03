@@ -31,9 +31,9 @@ export default class App extends Component{
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.welcome}>
-          Iniciando o Mines!
+      <View style={styles.container}>
+        <Text >
+          Campo minado!
         </Text>
         <Text style={styles.instructions}>
           Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
@@ -41,7 +41,7 @@ export default class App extends Component{
         <View style={styles.board}>
           <MineField board={this.state.board}/>
         </View>
-       </SafeAreaView>
+       </View>
     );
   }
 }
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
   board: {
     alignItems: 'center',
     backgroundColor: '#AAA',
-    //margin: 10,
   },
   instructions: {
     textAlign: 'center',
