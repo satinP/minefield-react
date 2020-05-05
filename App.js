@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import params from './src/params'
-import MineField from './src/components/MineField'
+import MineField from './src/components/MineField';
 import { createMinedBoard, cloneBoard, openField, 
-         hasExplosion, wonGame, showMines } from './src/functions'
+         hasExplosion, wonGame, showMines } from './src/functions';
 
 export default class App extends Component{
 
@@ -30,15 +30,17 @@ export default class App extends Component{
   }
 
   onOpenField = ( row, column ) => {
+    console.log('column',column);
     const clonedBoard = cloneBoard(this.state.board);
-
+    
     openField(clonedBoard, row, column);
-
-    const lost = hasExplosion(cloneBoard);
-    const won = wonGame(board);
+    console.log('row',clonedBoard);
+    
+    const lost = hasExplosion(clonedBoard);
+    const won = wonGame(clonedBoard);
 
     if ( lost ) {
-      showMines(board);
+      showMines(clonedBoard);
       console.log('perdeu');
     }
 
@@ -46,7 +48,7 @@ export default class App extends Component{
       console.log('venceu');
     }
 
-    this.setState({ board, lost, won });
+    this.setState({ clonedBoard, lost, won });
   }
 
   render() {
