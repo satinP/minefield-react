@@ -3,7 +3,9 @@ import { StyleSheet, Text, View} from 'react-native';
 import params from './src/params'
 import MineField from './src/components/MineField';
 import { createMinedBoard, cloneBoard, openField, 
-         hasExplosion, wonGame, showMines, invertFlag } from './src/functions';
+         hasExplosion, wonGame, showMines, invertFlag, usedFlags } from './src/functions';
+import Header from './src/components/Header';
+import LevelSelection from './src/screens/LevelSelection'
 
 export default class App extends Component{
 
@@ -25,7 +27,8 @@ export default class App extends Component{
     return {
       board: createMinedBoard(rows, cols, this.getMinesAmount()),
       won: false,
-      lost: false
+      lost: false,
+      showLevelSelection: false,
     }
   }
 
@@ -63,20 +66,33 @@ export default class App extends Component{
     this.setState({board, won});
   }
 
+  onLevelSelected = level => {
+    params.difficultLevel = level;
+
+    this.setState(this.createState());
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text >
-          Campo minado!
-        </Text>
-        <Text style={styles.instructions}>
-          Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}
-        </Text>
+
+        <LevelSelection isVisible={this.state.showLevelSelection}
+                        onLevelSelected={this.onLevelSelected}
+                        onCancel={() => this.setState({ showLevelSelection: false })}>
+
+        </LevelSelection>
+
+        <Header  flagsLeft={this.getMinesAmount() - usedFlags(this.state.board)} 
+                 onNewGame={() => this.setState(this.createState())}
+                 onFlagPress={() => {this.setState({ showLevelSelection: true })}}>
+        </Header>
+
         <View style={styles.board}>
           <MineField board={this.state.board}
             onOpenField={this.onOpenField}
             onSelectField={this.onSelectField}/>
         </View>
+
        </View>
     );
   }
@@ -85,15 +101,9 @@ export default class App extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
   },
   board: {
     alignItems: 'center',
     backgroundColor: '#AAA',
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
