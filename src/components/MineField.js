@@ -9,11 +9,11 @@ export default props => {
         onOpen={() => props.onOpenField(r, c)}/>
     });
 
-  return <View key={r}
+    return <View key={r}
           style={{flexDirection: 'row'}}>{columns}
          </View>
   });
-return <View styles={styles.container}>{rows}</View>
+  return <View style={styles.container}>{rows}</View>
 }
 
 const styles = StyleSheet.create({

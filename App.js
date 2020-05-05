@@ -30,25 +30,23 @@ export default class App extends Component{
   }
 
   onOpenField = ( row, column ) => {
-    console.log('column',column);
-    const clonedBoard = cloneBoard(this.state.board);
-    
-    openField(clonedBoard, row, column);
-    console.log('row',clonedBoard);
-    
-    const lost = hasExplosion(clonedBoard);
-    const won = wonGame(clonedBoard);
+    const board = cloneBoard(this.state.board);
+
+    openField(board, row, column);
+
+    const lost = hasExplosion(board);
+    const won = wonGame(board);
 
     if ( lost ) {
-      showMines(clonedBoard);
       console.log('perdeu');
+      showMines(board);
     }
 
     if ( won ) {
-      console.log('venceu');
+      console.log('ganhou');
     }
 
-    this.setState({ clonedBoard, lost, won });
+    this.setState({ board, lost, won });
   }
 
   render() {
