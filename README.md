@@ -7,5 +7,5 @@
  - executar npm install
  - react-native run-android ou react-native run-ios
 
-#### APK Link
+#### APK Link:
 [Download APK](https://drive.google.com/file/d/1s0gqtMRnAqGCxwcT9CcAhb6WFGjBNPaZ/view?usp=sharing)
