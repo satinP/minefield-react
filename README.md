@@ -1,4 +1,5 @@
 ## Campo Minado
+<img src="/demo/minefield-react-gif.gif?raw=true" align="right" width="20%">
 
 ### Jogo desenvolvido utilizando react-native
 
